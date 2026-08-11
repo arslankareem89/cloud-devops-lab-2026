@@ -1,0 +1,31 @@
+---
+- name: Install Docker
+  ansible.builtin.dnf:
+    name: "{{ docker_package }}"
+    state: present
+
+- name: Enable and start Docker
+  ansible.builtin.systemd:
+    name: "{{ docker_service }}"
+    enabled: true
+    state: started
+
+- name: Verify Docker service is running
+  ansible.builtin.command:
+    cmd: systemctl is-active docker
+  register: docker_service_status
+  changed_when: false
+
+- name: Display Docker service status
+  ansible.builtin.debug:
+    msg: "Docker service status: {{ docker_service_status.stdout }}"
+
+- name: Verify Docker version
+  ansible.builtin.command:
+    cmd: docker --version
+  register: docker_version
+  changed_when: false
+
+- name: Display Docker version
+  ansible.builtin.debug:
+    msg: "{{ docker_version.stdout }}"

@@ -1,0 +1,4 @@
+---
+# Bastion server configuration
+
+bastion_user: ec2-user

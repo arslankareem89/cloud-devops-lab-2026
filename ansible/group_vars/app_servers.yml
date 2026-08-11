@@ -1,0 +1,8 @@
+---
+# Application server configuration
+
+app_user: appuser
+app_directory: /opt/app
+
+docker_packages:
+  - docker

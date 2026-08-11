@@ -1,0 +1,16 @@
+---
+- name: Configure bastion servers
+  hosts: bastion_servers
+  become: true
+
+  roles:
+    - common
+
+- name: Configure application servers
+  hosts: app_servers
+  become: true
+
+  roles:
+    - common
+    - docker
+    - app
